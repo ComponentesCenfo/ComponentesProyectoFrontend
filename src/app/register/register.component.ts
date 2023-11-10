@@ -16,7 +16,7 @@ export class RegisterComponent {
     age : 0,
     phone : 0,
     sex : '',
-    weight : '',
+    weight : 0,
     password : ''
   }
   passwordRepeat = ''
