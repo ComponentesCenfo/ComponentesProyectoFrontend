@@ -1,1 +1,40 @@
-<p>register works!</p>
+<form (ngSubmit)="formSubmit()">
+    <div class="form-outline mb-4">
+      <input type="email" id="form2Example1" class="form-control" [(ngModel)]="registerData.email" name="email"/>
+      <label class="form-label" for="form2Example1">Email</label>
+    </div>
+
+    <div class="form-outline mb-4">
+      <input type="text" id="form2Example2" class="form-control" [(ngModel)]="registerData.firstName" name="firstName"/>
+      <label class="form-label" for="form2Example2" >Nombre</label>
+    </div>
+    <div class="form-outline mb-4">
+        <input type="text" id="form2Example2" class="form-control" [(ngModel)]="registerData.lastName" name="lastName"/>
+        <label class="form-label" for="form2Example2" >Apellidos</label>
+    </div>
+    <div class="form-outline mb-4">
+        <input type="number" id="form2Example2" class="form-control" [(ngModel)]="registerData.age" name="age"/>
+        <label class="form-label" for="form2Example2" >Edad</label>
+    </div>
+    <div class="form-outline mb-4">
+        <input type="number" id="form2Example2" class="form-control" [(ngModel)]="registerData.phone" name="phone"/>
+        <label class="form-label" for="form2Example2" >Teléfono</label>
+    </div>
+    <div class="form-outline mb-4">
+        <select [(ngModel)]="registerData.sex" name="sex" id="lang">
+            <option value="masculino">Masculino</option>
+            <option value="femenino">Femenino</option>
+            <option value="otro">Otro</option>
+        </select>
+        <label class="form-label" for="form2Example2" >Género</label>
+    </div>
+    <div class="form-outline mb-4">
+        <input type="password" id="form2Example2" class="form-control" [(ngModel)]="registerData.password" name="password"/>
+        <label class="form-label" for="form2Example2" >Contraseña</label>
+    </div>
+    <div class="form-outline mb-4">
+        <input type="password" id="form2Example2" class="form-control" [(ngModel)]="passwordRepeat" name="passwordRepeat"/>
+        <label class="form-label" for="form2Example2" >Repetir Contraseña</label>
+      </div>
+    <button type="submit" class="btn btn-primary btn-block mb-4">Registrarme</button>
+</form>
