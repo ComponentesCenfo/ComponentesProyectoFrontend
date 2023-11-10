@@ -72,6 +72,7 @@ export class LoginComponent implements OnInit{
       return;
     }
 
+    
     if(this.loginData.email && this.loginData.password){
       window.location.href = '/';
     }
