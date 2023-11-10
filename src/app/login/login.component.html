@@ -1,1 +1,15 @@
-<p>login works!</p>
+<form (ngSubmit)="formSubmit()">
+    <div class="form-outline mb-4">
+      <input type="email" id="form2Example1" class="form-control" [(ngModel)]="loginData.email" name="email"/>
+      <label class="form-label" for="form2Example1">Email</label>
+    </div>
+
+    <div class="form-outline mb-4">
+      <input type="password" id="form2Example2" class="form-control" [(ngModel)]="loginData.password" name="password"/>
+      <label class="form-label" for="form2Example2" >Contraseña</label>
+    </div>
+    <button type="submit" class="btn btn-primary btn-block mb-4">Sign in</button>
+    <div class="text-center">
+      <a href="/register">Registrarse</a>
+    </div>
+</form>
