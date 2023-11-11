@@ -68,23 +68,27 @@ export class RegisterComponent {
 
     this.userService.addUser(this.registerData).subscribe(
       (response) => {
-        console.log(response);
-
+        // Manejo del caso exitoso
         Swal.fire({
           title: 'Usuario guardado',
           text: 'Usuario registrado con éxito.',
-          showCancelButton: false,
-          showConfirmButton: true,
-          confirmButtonText: 'Aceptar',
-          confirmButtonColor: 'pink',
-        }).then((result) => {
-          if (result.isConfirmed) {
-            // El usuario hizo clic en "Aceptar"
-          }
+          icon: 'success'
         });
-
         this.router.navigate(['/login']);
-      })
-
+      },
+      (error) => {
+        // Manejo de errores
+        let errorMessage = 'Ocurrió un error al registrar el usuario.';
+        if (error.status === 400 && error.error === 'El email ya está registrado.') {
+          errorMessage = error.error;
+        }
+        // Mostrar el mensaje de error
+        Swal.fire({
+          title: 'Error',
+          text: errorMessage,
+          icon: 'error'
+        });
+      }
+    );
   }
 }
