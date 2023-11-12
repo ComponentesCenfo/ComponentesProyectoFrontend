@@ -11,8 +11,11 @@ export class UserService{
 
     public addUser(user: any) {
     return this.httpClient.post(`${baseUrl()}/createClient`, user);
-  }
-    public getUsers() {
-        return this.httpClient.get(`${baseUrl()}/getClients`);
+    }
+    public getClients() {
+        return this.httpClient.get(`${baseUrl()}/allClients`);
+    }
+    public getTrainers() {
+        return this.httpClient.get(`${baseUrl()}/allTrainers`);
     }
 }

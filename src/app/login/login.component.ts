@@ -77,5 +77,45 @@ export class LoginComponent implements OnInit{
       window.location.href = '/';
     }
 
+//     this.userService.getClients().subscribe(
+//       (clientsResponse: any) => {
+//         const clients = clientsResponse as any[]; // Asumiendo que la respuesta es un array
+//         const client = clients.find(c => c.email === this.loginData.email && c.password === this.loginData.password);
+//         if (client) {
+//           // Cliente encontrado
+//           this.handleSuccessfulLogin();
+//         } else {
+//           // Si no se encuentra en clientes, verifica en entrenadores
+//           this.userService.getTrainers().subscribe(
+//             (trainersResponse: any) => {
+//               const trainers = trainersResponse as any[];
+//               const trainer = trainers.find(t => t.email === this.loginData.email && t.password === this.loginData.password);
+//               if (trainer) {
+//                 // Entrenador encontrado
+//                 this.handleSuccessfulLogin();
+//               } else {
+//                 // Usuario no encontrado en ninguna lista
+//                 Swal.fire('Login Failed', 'Invalid email or password.', 'error');
+//               }
+//             },
+//             (error) => {
+//               // Manejo de errores de la solicitud HTTP
+//               Swal.fire('Error', 'User not found.', 'error');
+//             }
+//           );
+//         }
+//       },
+//       (error) => {
+//         // Manejo de errores de la solicitud HTTP
+//         Swal.fire('Error', 'User not found.', 'error');
+//       }
+//     );
+//   }
+
+// private handleSuccessfulLogin() {
+//   Swal.fire('Login Successful', 'You have been successfully logged in!', 'success');
+//   this.router.navigate(['/']); // Navega a la página de inicio o dashboard
+//}
+
   }
 }

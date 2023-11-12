@@ -1,24 +1,51 @@
 <nav class="navbar navbar-expand-lg bg-primary">
-    <a class="navbar-brand ms-3 text-white" href="#">Gym X</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav">
-        <li class="nav-item active">
-          <a class="nav-link text-white" href="#">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-white" href="#">About</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-white" href="#">Services</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-white" href="#">Contact</a>
-        </li>
-      </ul>
+    <a class="navbar-brand ms-3 text-white link-dark " href="/">
+        <img src="../../../assets/icons/mancuerna.png" alt="Logo" width="50" height="50">
+        Gym X
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>    
+    <div class="collapse navbar-collapse d-lg-flex justify-content-lg-between" id="navbarNav">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item active">
+                <a class="nav-link text-white link-light btn btn-primary" href="">
+                    <i class="bi bi-house-fill"></i>
+                    Home
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-white link-light btn btn-primary" href="#About">
+                    <i class="bi bi-people-fill"></i>
+                    About Us
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-white link-light btn btn-primary" href="#Services">
+                    <i class="bi bi-tools"></i>
+                    Services
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-white link-light btn btn-primary" href="#Contact">
+                    <i class="bi bi-envelope-fill"></i>
+                    Contact
+                </a>
+            </li>
+        </ul>
+        <ul class="navbar-nav me-4">
+            <li class="nav-item" *ngIf="!isRoute('login')">
+                <a class="nav-link text-white link-light fw-bold btn btn-primary " href="/login">
+                    <i class="bi bi-box-arrow-in-right"></i>
+                    Login
+                </a>
+            </li>
+            <li class="nav-item" *ngIf="!isRoute('register')">
+                <a class="nav-link text-white link-light fw-bold btn btn-primary" href="/register">
+                    <i class="bi bi-pencil-square"></i>
+                    Register
+                </a>
+            </li>
+        </ul>
     </div>
 </nav>
-
-  

@@ -8,12 +8,23 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { AboutComponent } from './home-page/about/about.component';
+import { ServicesComponent } from './home-page/services/services.component';
+import { ContactComponent } from './home-page/contact/contact.component';
+import { HomeComponent } from './home-page/home/home.component';
+import { HomePageComponent } from './home-page/home-page.component';
+
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     RegisterComponent,
-    NavbarComponent
+    NavbarComponent,
+    AboutComponent,
+    ServicesComponent,
+    ContactComponent,
+    HomeComponent,
+    HomePageComponent
   ],
   imports: [
     BrowserModule,
