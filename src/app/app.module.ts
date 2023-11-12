@@ -13,6 +13,7 @@ import { ServicesComponent } from './home-page/services/services.component';
 import { ContactComponent } from './home-page/contact/contact.component';
 import { HomeComponent } from './home-page/home/home.component';
 import { HomePageComponent } from './home-page/home-page.component';
+import { LandingPageComponent } from './landing-page/landing-page.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { HomePageComponent } from './home-page/home-page.component';
     ServicesComponent,
     ContactComponent,
     HomeComponent,
-    HomePageComponent
+    HomePageComponent,
+    LandingPageComponent
   ],
   imports: [
     BrowserModule,
