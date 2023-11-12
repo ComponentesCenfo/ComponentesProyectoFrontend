@@ -74,7 +74,7 @@ export class LoginComponent implements OnInit{
 
     
     if(this.loginData.email && this.loginData.password){
-      window.location.href = '/';
+      window.location.href = '/landing-client';
     }
 
 //     this.userService.getClients().subscribe(
