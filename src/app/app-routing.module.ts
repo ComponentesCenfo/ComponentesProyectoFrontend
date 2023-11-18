@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import {LoginComponent} from "./login/login.component";
 import { RegisterComponent } from './register/register.component';
 import { HomePageComponent } from './home-page/home-page.component';
+import { TrainerRegisterComponent } from './trainer-register/trainer-register.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 const routes: Routes = [
   {
@@ -23,6 +24,11 @@ const routes: Routes = [
   {
     path: 'landing-client',
     component: LandingPageComponent,
+    pathMatch: 'full'
+  },
+  {
+    path: 'trainer-register',
+    component:TrainerRegisterComponent,
     pathMatch: 'full'
   }
 ];

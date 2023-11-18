@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
+import { UserService } from '../Services/user.service';
+import { LoginService } from '../Services/login.service';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +16,7 @@ export class LoginComponent implements OnInit{
     password: '',
   };
 
-  constructor(private router:Router) {
+  constructor(private router:Router, private userService:UserService, private loginService:LoginService) {
   }
 
   ngOnInit(): void {
@@ -71,11 +73,43 @@ export class LoginComponent implements OnInit{
       });
       return;
     }
-
     
-    if(this.loginData.email && this.loginData.password){
-      window.location.href = '/landing-client';
-    }
+    this.userService.getUserByEmail(this.loginData.email).subscribe(
+      (response:any) => {
+        this.loginService.setUser(response)
+        if(this.loginData.email == response.email && this.loginData.password == response.password){
+          window.location.href = "/landing-client"
+        }else{
+          Swal.fire({
+            title: 'Credenciales inválidos',
+            text: 'Lo sentimos, no pudimos procesar tus credenciales en este momento. Por favor, inténtalo de nuevo más tarde o comunícate con el soporte técnico si el problema persiste.',
+            showCancelButton: false,
+            showConfirmButton: true,
+            confirmButtonText: 'Aceptar',
+            confirmButtonColor: 'pink',
+          }).then((result) => {
+            if (result.isConfirmed) {
+              // El usuario hizo clic en "Aceptar"
+            }
+          });
+        }
+      }
+    )
+    /*this.userService.getUserByEmail(this.loginData.email).subscribe(
+      
+      (response:any) => {
+        const client = response as any;
+        client.email === this.loginData.email && client.password === this.loginData.password;
+        if(this.loginData.email == client.email && this.loginData.password == client.password){
+          window.location.href = '/landing-client';
+        }
+      }
+      
+    )*/
+    
+   // if(this.loginData.email && this.loginData.password){
+     // window.location.href = '/landing-client';
+    //}
 
 //     this.userService.getClients().subscribe(
 //       (clientsResponse: any) => {
@@ -116,6 +150,7 @@ export class LoginComponent implements OnInit{
 //   Swal.fire('Login Successful', 'You have been successfully logged in!', 'success');
 //   this.router.navigate(['/']); // Navega a la página de inicio o dashboard
 //}
-
+    
+    
   }
 }
