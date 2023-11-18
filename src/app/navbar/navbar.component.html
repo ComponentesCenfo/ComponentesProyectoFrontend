@@ -46,6 +46,12 @@
                     Register
                 </a>
             </li>
+            <li class="nav-item" *ngIf="!isRoute('register')">
+                <a class="nav-link text-white link-light fw-bold btn btn-primary" href="/trainer-register">
+                    <i class="bi bi-pencil-square"></i>
+                    Want to be trainer?
+                </a>
+            </li>
         </ul>
     </div>
 </nav>

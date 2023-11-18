@@ -1,0 +1,47 @@
+
+<div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-8 col-lg-6">
+        <h2 class="text-center mt-3 ">Register</h2>
+        <form (ngSubmit)="formSubmit()">
+          <div class="form-outline my-4">
+            <label class="form-label" for="emailInput">Email</label>
+            <input type="email" id="emailInput" class="form-control" [(ngModel)]="registerData.email" name="email"/>
+          </div>
+  
+          <div class="form-outline mb-4">
+            <label class="form-label" for="firstNameInput">First Name</label>
+            <input type="text" id="firstNameInput" class="form-control" [(ngModel)]="registerData.firstName" name="firstName"/>
+          </div>
+  
+          <div class="form-outline mb-4">
+            <label class="form-label" for="lastNameInput">Last Name</label>
+            <input type="text" id="lastNameInput" class="form-control" [(ngModel)]="registerData.lastName" name="lastName"/>
+          </div>
+  
+          <div class="form-outline mb-4">
+            <label class="form-label" for="phoneInput">Phone</label>
+            <input type="number" id="phoneInput" class="form-control" [(ngModel)]="registerData.phone" name="phone"/>
+          </div>
+  
+          <div class="form-outline mb-4">
+            <label class="form-label" for="passwordInput">Password</label>
+            <input type="password" id="passwordInput" class="form-control" [(ngModel)]="registerData.password" name="password"/>
+          </div>
+  
+          <div class="form-outline mb-4">
+            <label class="form-label" for="passwordRepeatInput">Confirm Password</label>
+            <input type="password" id="passwordRepeatInput" class="form-control" [(ngModel)]="passwordRepeat" name="passwordRepeat"/>
+          </div>
+          <div>
+            <p class="mb-0">Already have an account?<a href="/login" class="btn btn-link">Login here</a></p>
+          </div>
+          
+          <div class="d-flex justify-content-center ">
+            <button type="submit" class="btn btn-primary mb-4">Send</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  

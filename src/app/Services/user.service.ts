@@ -8,7 +8,10 @@ import {baseUrl} from './helper';
 
 export class UserService{
     constructor(private httpClient: HttpClient) {}
-
+    
+    public getUserByEmail(email:any){
+        return this.httpClient.post(`${baseUrl()}/getClientByEmail`, email)
+    }
     public addUser(user: any) {
     return this.httpClient.post(`${baseUrl()}/createClient`, user);
     }
