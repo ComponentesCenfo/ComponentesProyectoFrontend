@@ -4,7 +4,7 @@ import {LoginComponent} from "./login/login.component";
 import { RegisterComponent } from './register/register.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { TrainerRegisterComponent } from './trainer-register/trainer-register.component';
-import { LandingPageComponent } from './landing-page/landing-page.component';
+import { LandingPageClientComponent } from './landing-page-client/landing-page-client.component';
 const routes: Routes = [
   {
     path:'login',
@@ -23,7 +23,7 @@ const routes: Routes = [
   },
   {
     path: 'landing-client',
-    component: LandingPageComponent,
+    component: LandingPageClientComponent,
     pathMatch: 'full'
   },
   {
