@@ -13,7 +13,7 @@ import { ServicesComponent } from './home-page/services/services.component';
 import { ContactComponent } from './home-page/contact/contact.component';
 import { HomeComponent } from './home-page/home/home.component';
 import { HomePageComponent } from './home-page/home-page.component';
-import { LandingPageComponent } from './landing-page/landing-page.component';
+import { LandingPageClientComponent } from './landing-page-client/landing-page-client.component';
 import { TrainerRegisterComponent } from './trainer-register/trainer-register.component';
 
 @NgModule({
@@ -27,7 +27,7 @@ import { TrainerRegisterComponent } from './trainer-register/trainer-register.co
     ContactComponent,
     HomeComponent,
     HomePageComponent,
-    LandingPageComponent,
+    LandingPageClientComponent,
     TrainerRegisterComponent
   ],
   imports: [

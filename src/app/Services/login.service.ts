@@ -1,34 +1,28 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
-import { baseUrl } from './helper';
+import { Router } from '@angular/router';
 
 @Injectable({
     providedIn: 'root',
   })
   export class LoginService {
 
-    constructor(private http: HttpClient){}
+    constructor(private http: HttpClient,private router: Router ){}
 
-    public setUser(user: any) {
-        localStorage.setItem('user', JSON.stringify(user));
+    public setUserClient(user: any) {
+        localStorage.setItem('userClient', JSON.stringify(user));
+    }
+    public setUserTrainer(user: any) {
+        localStorage.setItem('userTrainer', JSON.stringify(user));
     }
 
     public getUser() {
-        let userStr = localStorage.getItem('user');
-        if (userStr != null) {
+      let userStr = localStorage.getItem('userClient') || localStorage.getItem('userTrainer');;      
+      if (userStr != null) {
           return JSON.parse(userStr);
-        } else {
-          //this.logout();
-          return JSON.parse(<string>{});
-        }
+      } else {
+          return null;
+      }
     }
-
-    /*public logout() {
-        this.http.get(`${baseUrl()}/rest/users/logout`).subscribe((response) => {
-          localStorage.removeItem('token');
-          localStorage.removeItem('user');
-        });
-        return true;
-      }*/
-}
+  
+  }

@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { UserService } from '../Services/user.service';
 import { LoginService } from '../Services/login.service';
+import { TrainerService } from '../Services/trainer.service';
 
 @Component({
   selector: 'app-login',
@@ -16,7 +17,7 @@ export class LoginComponent implements OnInit{
     password: '',
   };
 
-  constructor(private router:Router, private userService:UserService, private loginService:LoginService) {
+  constructor(private userService:UserService, private loginService:LoginService, private trainerService: TrainerService) {
   }
 
   ngOnInit(): void {
@@ -75,82 +76,53 @@ export class LoginComponent implements OnInit{
     }
     
     this.userService.getUserByEmail(this.loginData.email).subscribe(
-      (response:any) => {
-        this.loginService.setUser(response)
-        if(this.loginData.email == response.email && this.loginData.password == response.password){
-          window.location.href = "/landing-client"
-        }else{
-          Swal.fire({
-            title: 'Credenciales inválidos',
-            text: 'Lo sentimos, no pudimos procesar tus credenciales en este momento. Por favor, inténtalo de nuevo más tarde o comunícate con el soporte técnico si el problema persiste.',
-            showCancelButton: false,
-            showConfirmButton: true,
-            confirmButtonText: 'Aceptar',
-            confirmButtonColor: 'pink',
-          }).then((result) => {
-            if (result.isConfirmed) {
-              // El usuario hizo clic en "Aceptar"
-            }
-          });
+      (response: any) => {
+        // Assuming 'response' will be null or empty if no user is found
+        if (response) {
+          this.loginService.setUserClient(response);
+          if (this.loginData.email === response.email && this.loginData.password === response.password) {
+            window.location.href = "/landing-client";
+          } else {
+            this.showInvalidCredentialsAlert();
+          }
         }
+      },
+      (error) => {
+        // Handle error scenario
+        this.checkForTrainer();
       }
-    )
-    /*this.userService.getUserByEmail(this.loginData.email).subscribe(
-      
-      (response:any) => {
-        const client = response as any;
-        client.email === this.loginData.email && client.password === this.loginData.password;
-        if(this.loginData.email == client.email && this.loginData.password == client.password){
-          window.location.href = '/landing-client';
+    );
+  }
+  private checkForTrainer() {
+    this.trainerService.getTrainerByEmail(this.loginData.email).subscribe(
+      (trainerResponse: any) => {
+        if (trainerResponse) {
+          this.loginService.setUserTrainer(trainerResponse);
+          if (this.loginData.email === trainerResponse.email && this.loginData.password === trainerResponse.password) {
+            window.location.href = "/";
+          } else {
+            this.showInvalidCredentialsAlert();
+          }
+        } else {
+          // No trainer found either
+          this.showInvalidCredentialsAlert();
         }
+      },
+      (error: any) => {
+        // Handle error scenario
+        this.showInvalidCredentialsAlert();
       }
-      
-    )*/
-    
-   // if(this.loginData.email && this.loginData.password){
-     // window.location.href = '/landing-client';
-    //}
-
-//     this.userService.getClients().subscribe(
-//       (clientsResponse: any) => {
-//         const clients = clientsResponse as any[]; // Asumiendo que la respuesta es un array
-//         const client = clients.find(c => c.email === this.loginData.email && c.password === this.loginData.password);
-//         if (client) {
-//           // Cliente encontrado
-//           this.handleSuccessfulLogin();
-//         } else {
-//           // Si no se encuentra en clientes, verifica en entrenadores
-//           this.userService.getTrainers().subscribe(
-//             (trainersResponse: any) => {
-//               const trainers = trainersResponse as any[];
-//               const trainer = trainers.find(t => t.email === this.loginData.email && t.password === this.loginData.password);
-//               if (trainer) {
-//                 // Entrenador encontrado
-//                 this.handleSuccessfulLogin();
-//               } else {
-//                 // Usuario no encontrado en ninguna lista
-//                 Swal.fire('Login Failed', 'Invalid email or password.', 'error');
-//               }
-//             },
-//             (error) => {
-//               // Manejo de errores de la solicitud HTTP
-//               Swal.fire('Error', 'User not found.', 'error');
-//             }
-//           );
-//         }
-//       },
-//       (error) => {
-//         // Manejo de errores de la solicitud HTTP
-//         Swal.fire('Error', 'User not found.', 'error');
-//       }
-//     );
-//   }
-
-// private handleSuccessfulLogin() {
-//   Swal.fire('Login Successful', 'You have been successfully logged in!', 'success');
-//   this.router.navigate(['/']); // Navega a la página de inicio o dashboard
-//}
-    
-    
+    );
+  }
+  
+  private showInvalidCredentialsAlert() {
+    Swal.fire({
+      title: 'Credenciales inválidos',
+      text: 'Lo sentimos, no pudimos procesar tus credenciales en este momento. Por favor, inténtalo de nuevo más tarde o comunícate con el soporte técnico si el problema persiste.',
+      showCancelButton: false,
+      showConfirmButton: true,
+      confirmButtonText: 'Aceptar',
+      confirmButtonColor: 'pink',
+    })
   }
 }
