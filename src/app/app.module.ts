@@ -15,6 +15,7 @@ import { HomeComponent } from './home-page/home/home.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { TrainerRegisterComponent } from './trainer-register/trainer-register.component';
+import { LandingPageTrainerComponent } from './landing-page-trainer/landing-page-trainer.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { TrainerRegisterComponent } from './trainer-register/trainer-register.co
     HomeComponent,
     HomePageComponent,
     LandingPageComponent,
-    TrainerRegisterComponent
+    TrainerRegisterComponent,
+    LandingPageTrainerComponent
   ],
   imports: [
     BrowserModule,
