@@ -5,6 +5,7 @@ import { RegisterComponent } from './register/register.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { TrainerRegisterComponent } from './trainer-register/trainer-register.component';
 import { LandingPageClientComponent } from './landing-page-client/landing-page-client.component';
+import { LandingPageTrainerComponent } from './landing-page-trainer/landing-page-trainer.component';
 const routes: Routes = [
   {
     path:'login',
@@ -28,7 +29,7 @@ const routes: Routes = [
   },
   {
     path: 'trainer',
-    component: LandingPageClientComponent,
+    component: LandingPageTrainerComponent,
     pathMatch: 'full'
   },
   {

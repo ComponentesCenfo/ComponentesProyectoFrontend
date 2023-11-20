@@ -81,7 +81,7 @@ export class LoginComponent implements OnInit{
         if (response) {
           this.loginService.setUserClient(response);
           if (this.loginData.email === response.email && this.loginData.password === response.password) {
-            window.location.href = "/landing-client";
+            window.location.href = "/client";
           } else {
             this.showInvalidCredentialsAlert();
           }
@@ -99,7 +99,7 @@ export class LoginComponent implements OnInit{
         if (trainerResponse) {
           this.loginService.setUserTrainer(trainerResponse);
           if (this.loginData.email === trainerResponse.email && this.loginData.password === trainerResponse.password) {
-            window.location.href = "/";
+            window.location.href = "/trainer";
           } else {
             this.showInvalidCredentialsAlert();
           }
