@@ -22,7 +22,12 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
-    path: 'landing-client',
+    path: 'client',
+    component: LandingPageClientComponent,
+    pathMatch: 'full'
+  },
+  {
+    path: 'trainer',
     component: LandingPageClientComponent,
     pathMatch: 'full'
   },
