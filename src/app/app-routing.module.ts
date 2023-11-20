@@ -3,7 +3,9 @@ import { RouterModule, Routes } from '@angular/router';
 import {LoginComponent} from "./login/login.component";
 import { RegisterComponent } from './register/register.component';
 import { HomePageComponent } from './home-page/home-page.component';
-import { LandingPageComponent } from './landing-page/landing-page.component';
+import { TrainerRegisterComponent } from './trainer-register/trainer-register.component';
+import { LandingPageClientComponent } from './landing-page-client/landing-page-client.component';
+import { LandingPageTrainerComponent } from './landing-page-trainer/landing-page-trainer.component';
 const routes: Routes = [
   {
     path:'login',
@@ -21,8 +23,18 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
-    path: 'landing-client',
-    component: LandingPageComponent,
+    path: 'client',
+    component: LandingPageClientComponent,
+    pathMatch: 'full'
+  },
+  {
+    path: 'trainer',
+    component: LandingPageTrainerComponent,
+    pathMatch: 'full'
+  },
+  {
+    path: 'trainer-register',
+    component:TrainerRegisterComponent,
     pathMatch: 'full'
   }
 ];

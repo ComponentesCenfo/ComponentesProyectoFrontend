@@ -1,0 +1,14 @@
+.bg-image {
+    background-image: url('/assets/background2.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    padding-right: 12px;
+  }
+  
+  @media (max-width: 768px) {
+    .bg-image {
+      height: auto;
+    }
+  }
