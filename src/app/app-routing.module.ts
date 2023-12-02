@@ -6,6 +6,7 @@ import { HomePageComponent } from './home-page/home-page.component';
 import { TrainerRegisterComponent } from './trainer-register/trainer-register.component';
 import { LandingPageClientComponent } from './landing-page-client/landing-page-client.component';
 import { LandingPageTrainerComponent } from './landing-page-trainer/landing-page-trainer.component';
+import { TrainingPlanComponent } from './training-plan/training-plan.component';
 import { ExercisesComponent } from './exercises/exercises.component';
 const routes: Routes = [
   {
@@ -41,6 +42,11 @@ const routes: Routes = [
   {
     path: 'trainer-register',
     component:TrainerRegisterComponent,
+    pathMatch: 'full'
+  },
+  {
+    path: 'trainingPlan',
+    component:TrainingPlanComponent,
     pathMatch: 'full'
   }
 ];
