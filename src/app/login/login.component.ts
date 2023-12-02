@@ -82,9 +82,9 @@ export class LoginComponent implements OnInit{
           this.loginService.setUserClient(response);
           if (this.loginData.email === response.email && this.loginData.password === response.password) {
             window.location.href = "/client";
-          } else {
-            this.showInvalidCredentialsAlert();
-          }
+          }   
+        }else {
+          this.showInvalidCredentialsAlert();
         }
       },
       (error) => {
@@ -94,6 +94,7 @@ export class LoginComponent implements OnInit{
     );
   }
   private checkForTrainer() {
+    
     this.trainerService.getTrainerByEmail(this.loginData.email).subscribe(
       (trainerResponse: any) => {
         if (trainerResponse) {

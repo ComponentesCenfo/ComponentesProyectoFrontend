@@ -1,0 +1,50 @@
+<div class="container mt-5">
+    <!-- Dropdown para seleccionar el cliente -->
+    <div class="form-group">
+        <label for="clienteDropdown">Seleccionar Cliente:</label>
+        <select class="form-control" id="clienteDropdown">
+            <option *ngFor="let client of clients" [value]="client.id">{{ client.firstName }}</option>
+        </select>
+    </div>
+
+    <!-- Campos de fecha para el plan de entrenamiento -->
+    <div class="form-row mb-3">
+        <div class="col-6">
+            <label for="fechaInicio">Fecha de Inicio:</label>
+            <input type="date" class="form-control" id="fechaInicio">
+        </div>
+        <div class="col-6">
+            <label for="fechaFin">Fecha de Fin:</label>
+            <input type="date" class="form-control" id="fechaFin">
+        </div>
+    </div>
+    <button class="btn btn-primary" type="button" (click)="formSubmit()">Crear plan</button>
+    <!-- Grid para la rutina de ejercicios -->
+    <div id="rutinaGrid" *ngIf="showRutinaGrid">
+        <!-- Fila de ejercicios -->
+        <label for="fechaFin">Ejercicios:</label>
+        <div class="row mb-3" *ngFor="let line of lines; let i = index">
+            <div class="col-4">
+                <!-- Dropdown para seleccionar el ejercicio -->
+                <select class="form-control" id="exerciseSelection">
+                    <option *ngFor="let exercise of exercises" [value]="exercise.id">{{ exercise.name }}</option>
+                </select>
+            </div>
+            <div class="col-4">
+                <!-- Campo para las repeticiones -->
+                <input type="number" class="form-control" placeholder="Repeticiones">
+            </div>
+            <div class="col-4">
+                <!-- Campo para las series -->
+                <input type="number" class="form-control" placeholder="Series">
+            </div>
+        </div>
+        <!-- Fin de la fila de ejercicios -->
+        <button class="btn btn-primary" type="button" (click)="addLine()">+</button>
+        <button class="btn btn-primary" type="button" (click)="formSubmit()">Enviar</button>
+    </div>
+
+    <!-- Botón para agregar más filas -->
+    
+
+</div>
