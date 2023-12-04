@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { TrainingPlanServiceService } from '../Services/training-plan.service';
 import { UserService } from '../Services/user.service';
 import { ExerciseService } from '../Services/exercise.service';
@@ -11,39 +10,38 @@ import Swal from 'sweetalert2';
   styleUrls: ['./training-plan.component.css']
 })
 export class TrainingPlanComponent implements OnInit{
-  trainingPlan = {
-    client: { id:''},
-    trainer:{id:''},
-    startDate : '',
-    endDate : '',
+  trainingPlan: any = {
+    client: { id: '' },
+    trainer: { id: '' },
+    startDate: '',
+    endDate: '',
     exerciseList: []
   }
-
-  exerciseCriteria = {
-    exercise: {id:''},
-    trainingPlan:{trainingPlan_id:''},
+  
+  exerciseCriteria: any = {
+    exercise: { id: '' },
+    trainingPlan: { trainingPlan_id: '' },
     repetitions: '',
     series: ''
   }
 
-  
   public exercises: any[];
-  public clients : any[];
+  public clients: any[];
   public lines: any[];
-  public plan : any[];
+  public plan: any[];
   public showRutinaGrid: boolean = false;
-  constructor(private exerciseService: ExerciseService, private trainingPlanService:TrainingPlanServiceService, private userService:UserService){
+
+  constructor(private exerciseService: ExerciseService, private trainingPlanService: TrainingPlanServiceService, private userService: UserService) {
     this.clients = [];
-    this.exercises = []
-    this.lines = []
-    this.plan = []
+    this.exercises = [];
+    this.lines = [];
+    this.plan = [];
   }
 
   ngOnInit(): void {
     this.getAllClients()
     this.getAllExercises()
     this.addLine()
-    this.addExercises()
   }
 
   getAllClients(): void{
@@ -57,7 +55,7 @@ export class TrainingPlanComponent implements OnInit{
       this.exercises = response;
     })
   };
-
+  
   private getClientId(): void{
     const id = document.getElementById("clienteDropdown") as HTMLInputElement;
     this.trainingPlan.client.id = id.value;
@@ -79,8 +77,7 @@ export class TrainingPlanComponent implements OnInit{
     return this.trainingPlan.endDate;
   }
 
-  private addExercises(): void{
-
+  private addExercises(trainingPlanId: string): void {
     this.lines.forEach((line: any) => {
       const exerciseId = line.exerciseId;
       const repetitions = line.reps;
@@ -88,11 +85,22 @@ export class TrainingPlanComponent implements OnInit{
       this.exerciseCriteria.exercise.id = exerciseId;
       this.exerciseCriteria.repetitions = repetitions;
       this.exerciseCriteria.series = series;
-      this.exerciseCriteria.trainingPlan.trainingPlan_id = this.plan[this.plan.length-1].trainingPlan_id;
-      console.log(this.exerciseCriteria)
-      this.exerciseService.createExerciseCriteria(this.exerciseCriteria).subscribe();
-    });
+      this.exerciseCriteria.trainingPlan.trainingPlan_id = trainingPlanId;
 
+      this.exerciseService.createExerciseCriteria(this.exerciseCriteria).subscribe((response: any) => {
+          Swal.fire({
+            title: 'Exercise criteria added successfully',
+            text: 'Return to the home page',
+            showCancelButton: false,
+            showConfirmButton: true,
+            confirmButtonText: 'Accept',
+            confirmButtonColor: 'green',
+          
+          })
+          
+        }, error => console.error('API error:', error)
+            );
+        });
   }
 
   addLine():void {
@@ -100,48 +108,63 @@ export class TrainingPlanComponent implements OnInit{
 
     });
   }
-  formSubmit(): void{
-    this.getClientId()
-    this.obtenerFechaFin()
-    this.obtenerFechaInicio()
+  formSubmit(): void {
+    // Obtén los IDs del cliente y del entrenador, y las fechas
+    this.getClientId();
+    this.obtenerFechaInicio();
+    this.obtenerFechaFin();
+  
+    // Obtén el ID del entrenador del almacenamiento local
     const storedData = localStorage.getItem("userTrainer");
-
     if (storedData !== null) {
       const trainerId = JSON.parse(storedData);
       this.trainingPlan.trainer.id = trainerId.id;
-      
     }
-    
-    if (this.trainingPlan.client.id && this.trainingPlan.startDate && this.trainingPlan.endDate)
-    {
+  
+    // Verifica que todos los datos necesarios estén presentes
+    if (this.trainingPlan.client.id && this.trainingPlan.startDate && this.trainingPlan.endDate) {
       Swal.fire({
-        title: 'Cliente y fechas agregados con éxito',
-        text: 'Proceda a incluir los ejercicios',
+        title: 'Client and dates added successfully',
+        text: 'Proceed to include the exercises',
         showCancelButton: false,
         showConfirmButton: true,
-        confirmButtonText: 'Aceptar',
+        confirmButtonText: 'Accept',
         confirmButtonColor: 'green',
       }).then((result) => {
         if (result.isConfirmed) {
-          this.trainingPlanService.createTrainingPlan(this.trainingPlan).subscribe()
-          const client_id = Number(this.trainingPlan.client.id)
-          this.trainingPlanService.getTrainingPlan(client_id).subscribe((response:any)=>{
-            this.plan = response;
-            
-            if (response){
-              localStorage.setItem('trainingPlan', JSON.stringify(response))
+          // Crea el plan de entrenamiento
+          this.trainingPlanService.createTrainingPlan(this.trainingPlan).subscribe((response: any) => {
+            // Asegúrate de que la respuesta incluya el ID del plan de entrenamiento
+            if (response && response.trainingPlan_id) {
+              this.currentTrainingPlanId = response.trainingPlan_id; // Guarda el ID para usarlo después
+              this.showRutinaGrid = true;
+            } else {
+              // Manejo de error en caso de que la respuesta no sea la esperada
+              console.error('Error creating the training plan:', response);
             }
-          })
-          this.showRutinaGrid = true;
+          }, error => {
+            // Manejo de errores de la API
+            console.error('API error:', error);
+          });
         }
       });
-      return;
+    } else {
+      // Manejo de error si no todos los datos requeridos están presentes
+      console.error('Missing client, trainer or date data.');
     }
   }
+  
 
-  exercisesSubmit(){
-    this.addExercises()
-  }
+  currentTrainingPlanId: string | undefined;
+
+  exercisesSubmit(): void {
+    if (this.currentTrainingPlanId) {
+      this.addExercises(this.currentTrainingPlanId);
+    } else {
+      console.error('No trainingPlanId available for adding exercises.');
+      // Maneja el  como sea apropiado
+    }
+  }  
 }
 
  

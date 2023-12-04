@@ -9,6 +9,7 @@ import { LoginComponent } from "./login/login.component";
 import { RegisterComponent } from './register/register.component';
 import { TrainerRegisterComponent } from './trainer-register/trainer-register.component';
 import { TrainingPlanComponent } from './training-plan/training-plan.component';
+import { ClientTrainingPlanComponent } from './client-training-plan/client-training-plan.component';
 
 const routes: Routes = [
   {
@@ -54,6 +55,11 @@ const routes: Routes = [
   {
     path: 'trainingPlan',
     component:TrainingPlanComponent,
+    pathMatch: 'full'
+  },
+  {
+    path: 'ClientTrainingPlan',
+    component:ClientTrainingPlanComponent,
     pathMatch: 'full'
   }
 ];
