@@ -12,4 +12,8 @@ export class ExerciseService {
   public getAllExercises(){
     return this.httpClient.get(`${baseUrl()}/allExercises`)
   }
+
+  public createExerciseCriteria(exerciseCriteria:any){
+    return this.httpClient.post(`${baseUrl()}/createExerciseCriteria`, exerciseCriteria)
+  }
 }

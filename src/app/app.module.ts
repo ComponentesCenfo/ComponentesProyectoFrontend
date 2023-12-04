@@ -34,7 +34,7 @@ import { ExercisesComponent } from './exercises/exercises.component';
     LandingPageClientComponent,
     LandingPageTrainerComponent,
     TrainerRegisterComponent,
-    TrainingPlanComponent
+    TrainingPlanComponent,
     ExercisesComponent
   ],
   imports: [
