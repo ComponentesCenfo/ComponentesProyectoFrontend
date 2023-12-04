@@ -1,0 +1,28 @@
+<div class="container mt-3">
+  <h2>Calculadora de IMC</h2>
+
+  <!-- Entrada de Peso -->
+  <div class="mb-3">
+    <label for="peso" class="form-label">Peso (en kilogramos)</label>
+    <input type="number" class="form-control" id="peso" [(ngModel)]="peso" placeholder="Ingresa tu peso">
+  </div>
+
+  <!-- Entrada de Altura -->
+  <div class="mb-3">
+    <label for="altura" class="form-label">Altura (en metros)</label>
+    <input type="number" class="form-control" id="altura" [(ngModel)]="altura" placeholder="Ingresa tu altura">
+  </div>
+
+  <!-- Botón para Calcular IMC -->
+  <div class="mb-3">
+    <button class="btn btn-primary" (click)="calcularIMC()">Calcular IMC</button>
+  </div>
+
+  <!-- Resultado -->
+  <div *ngIf="imc">
+    <p>Tu IMC es: {{ imc | number: '1.1-2' }}</p>
+    <p>Clasificación: {{ clasificacionIMC }}</p>
+  </div>
+</div>
+
+
