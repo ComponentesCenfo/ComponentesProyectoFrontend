@@ -8,6 +8,8 @@ import { LandingPageClientComponent } from './landing-page-client/landing-page-c
 import { LandingPageTrainerComponent } from './landing-page-trainer/landing-page-trainer.component';
 import { TrainingPlanComponent } from './training-plan/training-plan.component';
 import { ExercisesComponent } from './exercises/exercises.component';
+import { ClientTrainingPlanComponent } from './client-training-plan/client-training-plan.component';
+
 const routes: Routes = [
   {
     path:'login',
@@ -47,6 +49,11 @@ const routes: Routes = [
   {
     path: 'trainingPlan',
     component:TrainingPlanComponent,
+    pathMatch: 'full'
+  },
+  {
+    path: 'ClientTrainingPlan',
+    component:ClientTrainingPlanComponent,
     pathMatch: 'full'
   }
 ];
