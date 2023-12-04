@@ -19,6 +19,7 @@ import { LandingPageTrainerComponent } from './landing-page-trainer/landing-page
 import { TrainingPlanComponent } from './training-plan/training-plan.component';
 
 import { ExercisesComponent } from './exercises/exercises.component';
+import { CalculatorComponent } from './calculator/calculator.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { ExercisesComponent } from './exercises/exercises.component';
     LandingPageTrainerComponent,
     TrainerRegisterComponent,
     TrainingPlanComponent,
-    ExercisesComponent
+    ExercisesComponent,
+    CalculatorComponent
   ],
   imports: [
     BrowserModule,
