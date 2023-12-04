@@ -1,0 +1,48 @@
+<div class="container mt-5">
+  <!-- Dropdown para seleccionar el cliente -->
+  <div class="form-group">
+      <label for="clienteDropdown">Select Client:</label>
+      <select class="form-control" id="clienteDropdown">
+          <option *ngFor="let client of clients" [value]="client.id">{{ client.firstName }}</option>
+      </select>
+  </div>
+
+  <!-- Campos de fecha para el plan de entrenamiento -->
+  <div class="form-row mb-3">
+      <div class="col-6">
+          <label for="fechaInicio">Start Date:</label>
+          <input type="date" class="form-control" id="fechaInicio">
+      </div>
+      <div class="col-6">
+          <label for="fechaFin">End Date:</label>
+          <input type="date" class="form-control" id="fechaFin">
+      </div>
+  </div>
+  <button class="btn btn-primary" type="button" (click)="formSubmit()">Create plan</button>
+  <!-- Grid para la rutina de ejercicios -->
+  <div id="rutinaGrid" *ngIf="showRutinaGrid">
+      <!-- Fila de ejercicios -->
+      <label for="fechaFin">Exercises:</label>
+      <div id="criterias" class="row mb-3" *ngFor="let line of lines; let i = index">
+          <div class="col-4">
+            <!-- Dropdown para seleccionar el ejercicio -->
+            <select class="form-control" [(ngModel)]="line.exerciseId">
+              <option *ngFor="let exercise of exercises" [value]="exercise.id">{{ exercise.name }}</option>
+            </select>
+          </div>
+          <div class="col-4">
+            <!-- Campo para las repeticiones -->
+            <input type="number" class="form-control" [(ngModel)]="line.reps" placeholder="Repetitions">
+          </div>
+          <div class="col-4">
+            <!-- Campo para las series -->
+            <input type="number" class="form-control" [(ngModel)]="line.series" placeholder="Series">
+          </div>
+        </div>
+      <!-- Fin de la fila de ejercicios -->
+      <button class="btn btn-primary me-3 " type="button" (click)="addLine()">+</button>
+
+      <button class="btn btn-primary" type="button" (click)="exercisesSubmit()">Submit</button>
+  </div>
+  
+</div>

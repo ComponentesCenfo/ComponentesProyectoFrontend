@@ -1,0 +1,62 @@
+<div class="container mt-3">
+    <h2>Exercise List</h2>
+  
+    <button class="btn btn-primary mb-3" (click)="showAddExerciseForm()">Add Exercise</button>
+  
+    <div *ngIf="showAddForm">
+        <form (ngSubmit)="addExercise(newExerciseForm.value)" #newExerciseForm="ngForm" >
+            <div class="mb-3">
+                <label for="exerciseName" class="form-label">Exercise Name</label>
+                <input type="text" class="form-control" id="exerciseName" name="name" ngModel required>
+            </div>
+            <div class="mb-3">
+                <label for="muscleGroup" class="form-label">Muscle Group</label>
+                <input type="text" class="form-control" id="muscleGroup" name="muscleGroup" ngModel required>
+            </div>
+            <div class="d-flex justify-content-center ">
+                <button type="submit" class="btn btn-success me-3">Add</button>
+                <button type="button" class="btn btn-danger" (click)="hideExerciseForm()">Cancel</button>
+            </div>
+        </form>
+    </div>
+
+    <div *ngIf="showEditForm">
+        <form (ngSubmit)="updateExercise(selectedExercise.id, editExerciseForm.value)" #editExerciseForm="ngForm">
+            <div class="mb-3">
+                <label for="editExerciseName" class="form-label">Exercise Name</label>
+                <input type="text" class="form-control" id="editExerciseName" name="name" [(ngModel)]="selectedExercise.name" required>
+            </div>
+            <div class="mb-3">
+                <label for="editMuscleGroup" class="form-label">Muscle Group</label>
+                <input type="text" class="form-control" id="editMuscleGroup" name="muscleGroup" [(ngModel)]="selectedExercise.muscleGroup" required>
+            </div>
+            <div>
+                <button type="submit" class="btn btn-warning me-3">Update Exercise</button>
+                <button type="button" class="btn btn-danger" (click)="hideExerciseForm()">Cancel</button>
+            </div>
+        </form>
+    </div>
+
+    <table class="table table-striped ">
+        <thead>
+            <tr>
+                <th class="text-white">Name</th>
+                <th class="text-white">Muscle Group</th>
+                <th class="text-white">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let exercise of exercises">
+                <td class="text-white">{{ exercise.name }}</td>
+                <td class="text-white">{{ exercise.muscleGroup }}</td>
+                <td>
+                    <button class="btn btn-warning btn-sm me-3" (click)="showEditExerciseForm(exercise)">Edit</button>
+                    <button class="btn btn-danger btn-sm" (click)="deleteExercise(exercise.id)">Delete</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+  </div>
+  
+  <!-- Aquí puedes agregar formularios modales o componentes para añadir/editar ejercicios -->
+  
