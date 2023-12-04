@@ -8,7 +8,10 @@ import { Router } from '@angular/router';
 })
 export class AppComponent {
   title = 'GYM X';
-  showScrollButton: boolean = false;  
+  showScrollButton: boolean = false;
+
+  constructor(private router: Router) {}
+  
 
   @HostListener('window:scroll', [])
   onWindowScroll() {
