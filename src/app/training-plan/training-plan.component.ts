@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { TrainingPlanServiceService } from '../Services/training-plan.service';
 import { UserService } from '../Services/user.service';
 import { ExerciseService } from '../Services/exercise.service';
@@ -11,17 +12,16 @@ import Swal from 'sweetalert2';
 })
 export class TrainingPlanComponent implements OnInit{
   trainingPlan = {
-    client_Id: '',
-    trainer_Id: '',
+    client: { id:''},
+    trainer:{id:''},
     startDate : '',
     endDate : '',
     exerciseList: []
   }
 
   exerciseCriteria = {
-
-    exerciseId: '',
-    trainingPlanId:'',
+    exercise: {id:''},
+    trainingPlan:{trainingPlan_id:''},
     repetitions: '',
     series: ''
   }
@@ -30,11 +30,13 @@ export class TrainingPlanComponent implements OnInit{
   public exercises: any[];
   public clients : any[];
   public lines: any[];
+  public plan : any[];
   public showRutinaGrid: boolean = false;
   constructor(private exerciseService: ExerciseService, private trainingPlanService:TrainingPlanServiceService, private userService:UserService){
     this.clients = [];
     this.exercises = []
     this.lines = []
+    this.plan = []
   }
 
   ngOnInit(): void {
@@ -58,7 +60,7 @@ export class TrainingPlanComponent implements OnInit{
 
   private getClientId(): void{
     const id = document.getElementById("clienteDropdown") as HTMLInputElement;
-    this.trainingPlan.client_Id = id.value;
+    this.trainingPlan.client.id = id.value;
 
   }
   private obtenerFechaInicio(): string {
@@ -78,32 +80,18 @@ export class TrainingPlanComponent implements OnInit{
   }
 
   private addExercises(): void{
-    
-    
-    
-    this.trainingPlan.exerciseList = [];
 
-  // Recorrer cada línea y agregar el ejercicio correspondiente
     this.lines.forEach((line: any) => {
-    const exerciseId = (document.getElementById("exerciseSelection") as HTMLSelectElement).value;
-    //const repetitions = (line.querySelector('input[placeholder="Repeticiones"]') as HTMLInputElement).value;
-    //const series = (line.querySelector('input[placeholder="Series"]') as HTMLInputElement).value;
-
-    // Verificar si los campos no están vacíos antes de agregar el ejercicio
-    if (exerciseId) {
-      const exercise = {
-        exerciseId: exerciseId,
-       // repetitions: repetitions,
-        //series: series
-      };
-      this.exercises.push(exerciseId);
-      
-    }
-  });
-  this.exercises = this.trainingPlan.exerciseList
-
-  // Imprimir la lista de ejercicios en la consola para verificar
-  console.log(this.trainingPlan.exerciseList);
+      const exerciseId = line.exerciseId;
+      const repetitions = line.reps;
+      const series = line.series;
+      this.exerciseCriteria.exercise.id = exerciseId;
+      this.exerciseCriteria.repetitions = repetitions;
+      this.exerciseCriteria.series = series;
+      this.exerciseCriteria.trainingPlan.trainingPlan_id = this.plan[this.plan.length-1].trainingPlan_id;
+      console.log(this.exerciseCriteria)
+      this.exerciseService.createExerciseCriteria(this.exerciseCriteria).subscribe();
+    });
 
   }
 
@@ -116,7 +104,15 @@ export class TrainingPlanComponent implements OnInit{
     this.getClientId()
     this.obtenerFechaFin()
     this.obtenerFechaInicio()
-    if (this.trainingPlan.client_Id && this.trainingPlan.startDate && this.trainingPlan.endDate)
+    const storedData = localStorage.getItem("userTrainer");
+
+    if (storedData !== null) {
+      const trainerId = JSON.parse(storedData);
+      this.trainingPlan.trainer.id = trainerId.id;
+      
+    }
+    
+    if (this.trainingPlan.client.id && this.trainingPlan.startDate && this.trainingPlan.endDate)
     {
       Swal.fire({
         title: 'Cliente y fechas agregados con éxito',
@@ -127,13 +123,24 @@ export class TrainingPlanComponent implements OnInit{
         confirmButtonColor: 'green',
       }).then((result) => {
         if (result.isConfirmed) {
-          console.log(this.trainingPlan)
           this.trainingPlanService.createTrainingPlan(this.trainingPlan).subscribe()
+          const client_id = Number(this.trainingPlan.client.id)
+          this.trainingPlanService.getTrainingPlan(client_id).subscribe((response:any)=>{
+            this.plan = response;
+            
+            if (response){
+              localStorage.setItem('trainingPlan', JSON.stringify(response))
+            }
+          })
           this.showRutinaGrid = true;
         }
       });
       return;
     }
+  }
+
+  exercisesSubmit(){
+    this.addExercises()
   }
 }
 

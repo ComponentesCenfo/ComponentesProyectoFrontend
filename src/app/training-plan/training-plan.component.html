@@ -23,25 +23,25 @@
     <div id="rutinaGrid" *ngIf="showRutinaGrid">
         <!-- Fila de ejercicios -->
         <label for="fechaFin">Ejercicios:</label>
-        <div class="row mb-3" *ngFor="let line of lines; let i = index">
+        <div id="criterias" class="row mb-3" *ngFor="let line of lines; let i = index">
             <div class="col-4">
-                <!-- Dropdown para seleccionar el ejercicio -->
-                <select class="form-control" id="exerciseSelection">
-                    <option *ngFor="let exercise of exercises" [value]="exercise.id">{{ exercise.name }}</option>
-                </select>
+              <!-- Dropdown para seleccionar el ejercicio -->
+              <select class="form-control" [(ngModel)]="line.exerciseId">
+                <option *ngFor="let exercise of exercises" [value]="exercise.id">{{ exercise.name }}</option>
+              </select>
             </div>
             <div class="col-4">
-                <!-- Campo para las repeticiones -->
-                <input type="number" class="form-control" placeholder="Repeticiones">
+              <!-- Campo para las repeticiones -->
+              <input type="number" class="form-control" [(ngModel)]="line.reps" placeholder="Repeticiones">
             </div>
             <div class="col-4">
-                <!-- Campo para las series -->
-                <input type="number" class="form-control" placeholder="Series">
+              <!-- Campo para las series -->
+              <input type="number" class="form-control" [(ngModel)]="line.series" placeholder="Series">
             </div>
-        </div>
+          </div>
         <!-- Fin de la fila de ejercicios -->
         <button class="btn btn-primary" type="button" (click)="addLine()">+</button>
-        <button class="btn btn-primary" type="button" (click)="formSubmit()">Enviar</button>
+        <button class="btn btn-primary" type="button" (click)="exercisesSubmit()">Enviar</button>
     </div>
 
     <!-- Botón para agregar más filas -->
