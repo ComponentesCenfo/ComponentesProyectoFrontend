@@ -14,16 +14,27 @@ export class TrainingPlanServiceService {
     return this.httpClient.post(`${baseUrl()}/createTrainingPlan`, trainingPlan)
   }
   
-  public getTrainingPlan(client_id: number) {
-    return this.httpClient.get<TrainingPlan>(`${baseUrl()}/getTrainingPlan?client_id=${client_id}`);
+  //Para obtener el ultimo plan de entrenamiento del cliente
+  public getLatestTrainingPlanByClientId(clientId: number) {
+    return this.httpClient.get<TrainingPlan>(`${baseUrl()}/getLatestTrainingPlanByClientId?clientId=${clientId}`);
+  }
+
+  //Para obtener todos los planes de entrenamiento del cliente
+  public getAllTrainingPlanByClientId(clientId: number) {
+    return this.httpClient.get<TrainingPlan[]>(`${baseUrl()}/getAllTrainingPlanByClientId?clientId=${clientId}`);
+  }
+
+  //Para obtener todos los planes de entrenamiento del entrenador
+  public getAllTrainingPlanByTrainerId(trainerId: number) {
+    return this.httpClient.get<TrainingPlan[]>(`${baseUrl()}/getAllTrainingPlanByTrainerId?trainerId=${trainerId}`);
   }
 
   public editTrainingPlan(trainingPlan:any){
-    return this.httpClient.post(`${baseUrl()}/editTrainingPlan`, trainingPlan)
+    return this.httpClient.put(`${baseUrl()}/editTrainingPlan`, trainingPlan)
   }
 
-  public deleteTrainingPlan(client_id:any){
-    return this.httpClient.post(`${baseUrl()}/deleteTrainingPlan`, client_id)
+  public deleteTrainingPlan(clientId:any){
+    return this.httpClient.delete(`${baseUrl()}/deleteTrainingPlan`, clientId)
   }
 
   

@@ -8,7 +8,10 @@ import { TrainingPlan } from './client-training-plan.model';
   styleUrls: ['./client-training-plan.component.css']
 })
 export class ClientTrainingPlanComponent implements OnInit {
-  trainingPlan: TrainingPlan | undefined;
+  trainingPlan: TrainingPlan  | undefined;
+  allTrainingPlans: TrainingPlan[] = [];
+  showAllTrainingPlans: boolean = false;
+
 
   constructor(private trainingPlanService: TrainingPlanServiceService) {}
 
@@ -17,12 +20,14 @@ export class ClientTrainingPlanComponent implements OnInit {
     if (userClientJSON){
       const userClient = JSON.parse(userClientJSON)
       const userClientId = userClient.id;
-      this.getTrainingPlan(userClientId); 
+      this.getLatestTrainingPlan(userClientId); 
+      this.loadAllTrainingPlans(userClientId); 
     }
+    
   }
 
-  getTrainingPlan(client_id: number) {
-    this.trainingPlanService.getTrainingPlan(client_id).subscribe(
+  getLatestTrainingPlan(client_id: number) {
+    this.trainingPlanService.getLatestTrainingPlanByClientId(client_id).subscribe(
       data => {
         this.trainingPlan = data;
       },
@@ -30,5 +35,18 @@ export class ClientTrainingPlanComponent implements OnInit {
         console.error('Error while retrieving the training plan', error);
       }
     );
+  }
+  loadAllTrainingPlans(client_id: number) {
+    this.trainingPlanService.getAllTrainingPlanByClientId(client_id).subscribe(
+      data => {
+        this.allTrainingPlans = data;
+      },
+      error => {
+        console.error('Error while retrieving all training plans', error);
+      }
+    );
+  }
+  toggleTrainingPlansVisibility() {
+    this.showAllTrainingPlans = !this.showAllTrainingPlans;
   }
 }
