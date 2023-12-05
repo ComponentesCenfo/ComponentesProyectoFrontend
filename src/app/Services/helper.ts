@@ -6,8 +6,3 @@ export const baseUrl = () => {
     }
     return '';
 }
-
-export const baseUrl = () => {
-    if(window.location.href.includes('localhost')){
-    }
-    return '';
