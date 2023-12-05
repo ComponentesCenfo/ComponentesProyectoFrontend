@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg bg-primary">
-    <a class="navbar-brand ms-3 text-white link-dark " href="/">
+    <a class="navbar-brand ms-3 text-white link-dark" href="/">
         <img src="../../../assets/icons/mancuerna.png" alt="Logo" width="50" height="50">
         Gym X
     </a>
@@ -14,42 +14,72 @@
                     Home
                 </a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link text-white link-light btn btn-primary" href="#About">
-                    <i class="bi bi-people-fill"></i>
-                    About Us
+            <li class="nav-item dropdown" *ngIf="!isLoggedIn">
+                <a class="nav-link dropdown-toggle text-white link-light btn btn-primary" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="bi bi-list"></i>
+                    Menú
                 </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown" >
+                    <li><a class="dropdown-item" href="#About"><i class="bi bi-people-fill me-md-2 "></i>About Us</a></li>
+                    <li><a class="dropdown-item" href="#Services"><i class="bi bi-tools me-md-2"></i>Services</a></li>
+                    <li><a class="dropdown-item" href="#Contact"><i class="bi bi-envelope-fill me-md-2"></i>Contact</a></li>
+                </ul>
             </li>
-            <li class="nav-item">
-                <a class="nav-link text-white link-light btn btn-primary" href="#Services">
-                    <i class="bi bi-tools"></i>
-                    Services
-                </a>
+            <!-- Links específicos para trainer -->
+            <li class="nav-item" *ngIf="userRole === 'userTrainer'">
+                <a class="nav-link text-white link-light btn btn-primary" href="/trainingPlan"><i class="bi bi-journal-text me-md-2"></i>Training Plan</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link text-white link-light btn btn-primary" href="#Contact">
-                    <i class="bi bi-envelope-fill"></i>
-                    Contact
-                </a>
+            <li *ngIf="userRole === 'userTrainer'">
+                <a class="nav-link text-white link-light btn btn-primary" href="/exercises"><i class="bi bi-clipboard-data me-md-2"></i>Exercises</a>
+            </li>
+            <li *ngIf="userRole === 'userTrainer' || userRole === 'userClient'">
+                <a class="nav-link text-white link-light btn btn-primary" href="/calculator"><i class="bi bi-calculator me-md-2"></i>Calculator</a>
+            </li>
+            <!-- Links específicos para client -->
+            <li *ngIf="userRole === 'userClient'">
+                <a class="nav-link text-white link-light btn btn-primary" href="/clientTrainingPlan"><i class="bi bi-calendar-week me-md-2"></i>Routine</a>
             </li>
         </ul>
         <ul class="navbar-nav me-4">
-            <li class="nav-item" *ngIf="!isRoute('login')">
-                <a class="nav-link text-white link-light fw-bold btn btn-primary " href="/login">
+            <!-- Secciones de login, registro y registro de entrenador -->
+            <li class="nav-item" *ngIf="!isLoggedIn">
+                <a class="nav-link text-white link-light fw-bold btn btn-primary" href="/login">
                     <i class="bi bi-box-arrow-in-right"></i>
                     Login
                 </a>
             </li>
-            <li class="nav-item" *ngIf="!isRoute('register')">
+            <li class="nav-item" *ngIf="!isLoggedIn">
                 <a class="nav-link text-white link-light fw-bold btn btn-primary" href="/register">
                     <i class="bi bi-pencil-square"></i>
                     Register
                 </a>
             </li>
-            <li class="nav-item" *ngIf="!isRoute('register')">
-                <a class="nav-link text-white link-light fw-bold btn btn-primary" href="/trainer-register">
+            <li class="nav-item" *ngIf="!isLoggedIn">
+                <a class="nav-link text-white link-light fw-bold btn btn-primary" href="/trainerRegister">
                     <i class="bi bi-pencil-square"></i>
                     Want to be trainer?
+                </a>
+            </li>
+
+            <!-- Secciones específicas del cliente y del entrenador -->
+            <li class="nav-item" *ngIf="isLoggedIn && userRole === 'userClient'">
+                <a class="nav-link text-white link-light fw-bold btn btn-primary" href="/clientProfile">
+                    <i class="bi bi-person-circle"></i>
+                    Client Profile
+                </a>
+            </li>
+            <li class="nav-item" *ngIf="isLoggedIn && userRole === 'userTrainer'">
+                <a class="nav-link text-white link-light fw-bold btn btn-primary" href="/trainerProfile">
+                    <i class="bi bi-person-circle"></i>
+                    Trainer Profile
+                </a>
+            </li>
+
+            <!-- Botón de Logout -->
+            <li class="nav-item" *ngIf="isLoggedIn">
+                <a class="nav-link text-white link-light fw-bold btn btn-primary" href="#" (click)="logout()">
+                    <i class="bi bi-box-arrow-right"></i>
+                    Logout
                 </a>
             </li>
         </ul>

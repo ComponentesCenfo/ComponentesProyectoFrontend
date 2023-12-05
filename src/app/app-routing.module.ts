@@ -10,56 +10,84 @@ import { RegisterComponent } from './register/register.component';
 import { TrainerRegisterComponent } from './trainer-register/trainer-register.component';
 import { TrainingPlanComponent } from './training-plan/training-plan.component';
 import { ClientTrainingPlanComponent } from './client-training-plan/client-training-plan.component';
-
+import { AuthGuard } from './Services/authGuard';
+import { ProfileComponent } from './profile/profile.component';
 const routes: Routes = [
   {
     path:'login',
     component:LoginComponent,
-    pathMatch:'full'
+    pathMatch: 'full',
+    canActivate: [AuthGuard]
+
   },
   {
     path: 'register',
     component: RegisterComponent,
-    pathMatch: 'full'
+    pathMatch: 'full',
+    canActivate: [AuthGuard]
   },
   {
     path: '',
     component: HomePageComponent,
-    pathMatch: 'full'
+    pathMatch: 'full',
+    canActivate: [AuthGuard]
+
   },
   {
     path: 'client',
     component: LandingPageClientComponent,
-    pathMatch: 'full'
+    canActivate: [AuthGuard],
+    data: { roles: ['userClient'] }
   },
   {
     path: 'trainer',
     component: LandingPageTrainerComponent,
-    pathMatch: 'full'
+    canActivate: [AuthGuard],
+    data: { roles: ['userTrainer'] }
   },
   {
     path: 'exercises',
     component: ExercisesComponent,
-    pathMatch: 'full'
+    pathMatch: 'full',
+    canActivate: [AuthGuard],
+    data: { roles: ['userTrainer'] }
   },
   {
     path: 'calculator',
     component: CalculatorComponent,
-    pathMatch: 'full'
+    pathMatch: 'full',
+    canActivate: [AuthGuard],
+    data: { roles: ['userClient','userTrainer'] }
   },
   {
-    path: 'trainer-register',
+    path: 'trainerRegister',
     component:TrainerRegisterComponent,
-    pathMatch: 'full'
+    pathMatch: 'full',
+    canActivate: [AuthGuard]    
   },
   {
-    path: 'training-plan',
+    path: 'trainingPlan',
     component:TrainingPlanComponent,
-    pathMatch: 'full'
+    pathMatch: 'full',
+    canActivate: [AuthGuard],
+    data: { roles: ['userTrainer'] }
   },
   {
-    path: 'client-training-plan',
+    path: 'clientTrainingPlan',
     component:ClientTrainingPlanComponent,
+    pathMatch: 'full',
+    canActivate: [AuthGuard],
+    data: { roles: ['userClient'] }
+  },
+  {
+    path: 'clientProfile',
+    component:ProfileComponent,
+    pathMatch: 'full',
+    data: { roles: ['userClient'] }
+  },
+  {
+    path: '**',
+    redirectTo: '/', // Reemplaza con tu ruta por defecto
     pathMatch: 'full'
   }
 ];
