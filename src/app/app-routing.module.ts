@@ -1,11 +1,16 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import {LoginComponent} from "./login/login.component";
-import { RegisterComponent } from './register/register.component';
+import { CalculatorComponent } from './calculator/calculator.component';
+import { ExercisesComponent } from './exercises/exercises.component';
 import { HomePageComponent } from './home-page/home-page.component';
-import { TrainerRegisterComponent } from './trainer-register/trainer-register.component';
 import { LandingPageClientComponent } from './landing-page-client/landing-page-client.component';
 import { LandingPageTrainerComponent } from './landing-page-trainer/landing-page-trainer.component';
+import { LoginComponent } from "./login/login.component";
+import { RegisterComponent } from './register/register.component';
+import { TrainerRegisterComponent } from './trainer-register/trainer-register.component';
+import { TrainingPlanComponent } from './training-plan/training-plan.component';
+import { ClientTrainingPlanComponent } from './client-training-plan/client-training-plan.component';
+
 const routes: Routes = [
   {
     path:'login',
@@ -33,8 +38,28 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
+    path: 'exercises',
+    component: ExercisesComponent,
+    pathMatch: 'full'
+  },
+  {
+    path: 'calculator',
+    component: CalculatorComponent,
+    pathMatch: 'full'
+  },
+  {
     path: 'trainer-register',
     component:TrainerRegisterComponent,
+    pathMatch: 'full'
+  },
+  {
+    path: 'training-plan',
+    component:TrainingPlanComponent,
+    pathMatch: 'full'
+  },
+  {
+    path: 'client-training-plan',
+    component:ClientTrainingPlanComponent,
     pathMatch: 'full'
   }
 ];

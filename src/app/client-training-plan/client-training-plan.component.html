@@ -1,0 +1,25 @@
+<div class="container mt-4">
+    <h1 class="mb-3 text-center">Training Plan</h1>
+    <div class="card mb-3" *ngIf="trainingPlan">
+        <div class="card-body">
+            <div class="row mb-2 align-items-center">
+                <div class="col-md-3 offset-md-3 col-6 text-md-start text-end fs-5">Start Date:</div>
+                <div class="col-md-3 col-6 text-md-end text-start fs-5">{{ trainingPlan.startDate | date: 'longDate' }}</div>
+            </div>
+            <div class="row mb-2 align-items-center">
+                <div class="col-md-3 offset-md-3 col-6 text-md-start text-end fs-5">End Date:</div>
+                <div class="col-md-3 col-6 text-md-end text-start fs-5">{{ trainingPlan.endDate | date: 'longDate' }}</div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 offset-md-3 col-12">
+                    <strong class="fs-5">Exercises:</strong>
+                    <ul class="list-unstyled">
+                        <li class="fs-5 col-md-10 offset-md-3 mb-2" *ngFor="let criteria of trainingPlan.exerciseCriterias">
+                            {{ criteria.exercise.name }} - {{ criteria.exercise.muscleGroup }} ({{ criteria.repetitions }} reps, {{ criteria.series }} series)
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
