@@ -21,4 +21,8 @@ export class UserService{
     public getTrainers() {
         return this.httpClient.get(`${baseUrl()}/allTrainers`);
     }
+
+    public editClient(id: number, user:any){
+        return this.httpClient.put(`${baseUrl()}/editClient/${id}`, user)
+    }
 }

@@ -11,7 +11,7 @@ import { TrainerRegisterComponent } from './trainer-register/trainer-register.co
 import { TrainingPlanComponent } from './training-plan/training-plan.component';
 import { ClientTrainingPlanComponent } from './client-training-plan/client-training-plan.component';
 import { AuthGuard } from './Services/authGuard';
-
+import { ProfileComponent } from './profile/profile.component';
 const routes: Routes = [
   {
     path:'login',
@@ -77,6 +77,12 @@ const routes: Routes = [
     component:ClientTrainingPlanComponent,
     pathMatch: 'full',
     canActivate: [AuthGuard],
+    data: { roles: ['userClient'] }
+  },
+  {
+    path: 'clientProfile',
+    component:ProfileComponent,
+    pathMatch: 'full',
     data: { roles: ['userClient'] }
   },
   {
