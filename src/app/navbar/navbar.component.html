@@ -25,7 +25,6 @@
                     <li><a class="dropdown-item" href="#Contact"><i class="bi bi-envelope-fill me-md-2"></i>Contact</a></li>
                 </ul>
             </li>
-            <!-- Links específicos para trainer -->
             <li class="nav-item" *ngIf="userRole === 'userTrainer'">
                 <a class="nav-link text-white link-light btn btn-primary" href="/trainingPlan"><i class="bi bi-journal-text me-md-2"></i>Training Plan</a>
             </li>
@@ -35,13 +34,11 @@
             <li *ngIf="userRole === 'userTrainer' || userRole === 'userClient'">
                 <a class="nav-link text-white link-light btn btn-primary" href="/calculator"><i class="bi bi-calculator me-md-2"></i>Calculator</a>
             </li>
-            <!-- Links específicos para client -->
             <li *ngIf="userRole === 'userClient'">
                 <a class="nav-link text-white link-light btn btn-primary" href="/clientTrainingPlan"><i class="bi bi-calendar-week me-md-2"></i>Routine</a>
             </li>
         </ul>
         <ul class="navbar-nav me-4">
-            <!-- Secciones de login, registro y registro de entrenador -->
             <li class="nav-item" *ngIf="!isLoggedIn">
                 <a class="nav-link text-white link-light fw-bold btn btn-primary" href="/login">
                     <i class="bi bi-box-arrow-in-right"></i>
@@ -61,7 +58,6 @@
                 </a>
             </li>
 
-            <!-- Secciones específicas del cliente y del entrenador -->
             <li class="nav-item" *ngIf="isLoggedIn && userRole === 'userClient'">
                 <a class="nav-link text-white link-light fw-bold btn btn-primary" href="/clientProfile">
                     <i class="bi bi-person-circle"></i>
@@ -75,7 +71,6 @@
                 </a>
             </li>
 
-            <!-- Botón de Logout -->
             <li class="nav-item" *ngIf="isLoggedIn">
                 <a class="nav-link text-white link-light fw-bold btn btn-primary" href="#" (click)="logout()">
                     <i class="bi bi-box-arrow-right"></i>
