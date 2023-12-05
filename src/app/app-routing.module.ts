@@ -51,16 +51,6 @@ const routes: Routes = [
     path: 'trainer-register',
     component:TrainerRegisterComponent,
     pathMatch: 'full'
-  },
-  {
-    path: 'trainingPlan',
-    component:TrainingPlanComponent,
-    pathMatch: 'full'
-  },
-  {
-    path: 'ClientTrainingPlan',
-    component:ClientTrainingPlanComponent,
-    pathMatch: 'full'
   }
 ];
 
