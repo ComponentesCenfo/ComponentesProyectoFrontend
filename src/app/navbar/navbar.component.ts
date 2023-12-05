@@ -23,6 +23,5 @@ export class NavbarComponent {
   logout(): void {
     localStorage.removeItem('userClient');
     localStorage.removeItem('userTrainer');
-    this.router.navigate(['/login']);
   }
 }

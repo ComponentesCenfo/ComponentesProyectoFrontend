@@ -1,21 +1,28 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router } from '@angular/router';
 
+type UserRole = 'userClient' | 'userTrainer' | '';
+
+
 @Injectable({
   providedIn: 'root'
 })
 export class AuthGuard implements CanActivate {
+    private roleRouteMap = {
+        'userClient': ['client', 'calculator', 'clientTrainingPlan'],
+        'userTrainer': ['trainer', 'exercises', 'trainingPlan', 'calculator'],
+        '': ['login', 'register', 'trainerRegister', '']
+        };
+    constructor(private router: Router) {}
 
-  constructor(private router: Router) {}
-
-  canActivate(route: ActivatedRouteSnapshot): boolean {
+    canActivate(route: ActivatedRouteSnapshot): boolean {
     const userRole = this.getUserRole();
     const isLoggedIn = this.isUserLoggedIn();
     const path = route.routeConfig?.path ?? '';
     const allowedRoles = route.data['roles'] as string[];
 
+    
 
-    // Comprobación para rutas base
     if (['login', 'register', 'trainerRegister', ''].includes(path)) {
       if (isLoggedIn) {
         this.redirectBasedOnRole(userRole);
@@ -24,21 +31,19 @@ export class AuthGuard implements CanActivate {
       return true;
     }
 
-    // Comprobación para otras rutas
     if (isLoggedIn) {
-        if (allowedRoles && allowedRoles.includes(userRole)) {
-          return true;
+        const allowedRoutes = this.roleRouteMap[userRole];
+        if (allowedRoutes.includes(path)) {
+            return true;
         }
         this.redirectBasedOnRole(userRole);
         return false;
       }
 
-    // Redirige a la página de login si el usuario no está logueado
-    this.router.navigate(['/']);
     return false;
   }
 
-    getUserRole(): string {
+    getUserRole(): UserRole  {
     if (localStorage.getItem('userClient')) {
       return 'userClient';
     } else if (localStorage.getItem('userTrainer')) {
