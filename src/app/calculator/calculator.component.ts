@@ -20,13 +20,13 @@ export class CalculatorComponent {
 
   clasificarIMC(): void {
     if (this.imc < 18.5) {
-      this.clasificacionIMC = 'Bajo peso';
+      this.clasificacionIMC = 'Underweight';
     } else if (this.imc >= 18.5 && this.imc < 25) {
       this.clasificacionIMC = 'Normal';
     } else if (this.imc >= 25 && this.imc < 30) {
-      this.clasificacionIMC = 'Sobrepeso';
+      this.clasificacionIMC = 'Overweight';
     } else {
-      this.clasificacionIMC = 'Obesidad';
+      this.clasificacionIMC = 'Obesity';
     }
   }
 }
