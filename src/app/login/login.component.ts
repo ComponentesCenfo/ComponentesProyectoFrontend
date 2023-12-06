@@ -122,7 +122,7 @@ export class LoginComponent implements OnInit{
       showCancelButton: false,
       showConfirmButton: true,
       confirmButtonText: 'Aceptar',
-      confirmButtonColor: 'pink',
+      confirmButtonColor: 'Red',
     })
   }
 }

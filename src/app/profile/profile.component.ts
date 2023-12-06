@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../Services/user.service';
 import { LoginService } from '../Services/login.service';
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -42,7 +43,14 @@ export class ProfileComponent implements OnInit {
     localStorage.setItem('userClient', JSON.stringify(updatedUserData));
     this.userService.editClient(this.clientId, updatedUserData).subscribe(() => {
     });
-
+    Swal.fire({
+      title: 'Datos actualizados',
+      text: 'Sus datos fueron almacenados con éxito',
+      showCancelButton: false,
+      showConfirmButton: true,
+      confirmButtonText: 'Aceptar',
+      confirmButtonColor: 'green',
+    })
     this.isEditMode = false; 
   }
 }
