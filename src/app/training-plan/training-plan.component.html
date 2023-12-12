@@ -38,11 +38,13 @@
       </div>
     </div>
     <button class="btn btn-primary me-3 " type="button" (click)="addLine()">Add Exercise</button>
-    <button *ngIf="!isUpdating" class="btn btn-primary" type="button" (click)="formSubmit()">Create Training Plan and Exercises</button>
-    <button *ngIf="isUpdating" class="btn btn-warning" type="button" (click)="updateTrainingPlan()">Update Training Plan and Exercises</button>
+    <!-- El create queda siempre por si el entrenador piensa copiar alguna rutina para otro user o solo cambiar algo para la rutina nueva -->
+    <button class="btn btn-primary" type="button" (click)="formSubmit()">Create</button>
+    <!-- El update aparece al seleccionar un rutina de la lista -->
+    <button *ngIf="isUpdating" class="btn btn-warning ms-3" type="button" (click)="updateTrainingPlan()">Update</button>
     <button class="btn btn-primary ms-3 " type="button" (click)="resetForm()">Cancel</button>
   <div>
-    <button class="btn btn-info mt-3" (click)="loadTrainerPlans()">{{ showTrainerPlans ? 'Hide' : 'Load' }} Trainer's Training Plans</button>    
+    <button class="btn btn-info mt-3" (click)="loadTrainerPlans()">{{ showTrainerPlans ? 'Hide' : 'Load' }} Training Plans</button>    
     <div *ngIf="showTrainerPlans">
       <div *ngFor="let clientGroup of clientsWithPlans">
         <h3 class="mt-3">{{ clientGroup.clientName }}</h3>
