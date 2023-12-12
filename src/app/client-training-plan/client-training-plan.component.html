@@ -3,14 +3,6 @@
     <div class="card" *ngIf="trainingPlan">
         <div class="card-body">
             <div class="row mb-2 align-items-center">
-                <p class="col-md-3 offset-md-3 col-6 text-md-start text-end fs-5 mb-3">Client:</p>
-                <p class="col-md-3 col-6 text-md-end text-start fs-5">{{ trainingPlan.client.firstName }} {{ trainingPlan.client.lastName }}</p>
-            </div>
-            <div class="row mb-2 align-items-center">
-                <p class="col-md-3 offset-md-3 col-6 text-md-start text-end fs-5 mb-3">Trainer:</p>
-                <p class="col-md-3 col-6 text-md-end text-start fs-5">{{ trainingPlan.trainer.firstName }} {{ trainingPlan.trainer.lastName }}</p>
-            </div>
-            <div class="row mb-2 align-items-center">
                 <p class="col-md-3 offset-md-3 col-6 text-md-start text-end fs-5 mb-3">Start Date:</p>
                 <p class="col-md-3 col-6 text-md-end text-start fs-5">{{ trainingPlan.startDate | date: 'longDate' }}</p>
             </div>
@@ -19,14 +11,45 @@
                 <p class="col-md-3 col-6 text-md-end text-start fs-5">{{ trainingPlan.endDate | date: 'longDate' }}</p>
             </div>
             <div class="row">
-                <div class="col-md-6 offset-md-3 col-12">
+                <div id = "test" class="col-md-6 offset-md-3 col-12">
                     <strong class="fs-5">Exercises:</strong>
-                    <ul class="list-unstyled">
-                        <li class="fs-5 col-md-10 offset-md-3 mb-2" *ngFor="let criteria of trainingPlan.exerciseCriterias">
-                            {{ criteria.exercise.name }} - {{ criteria.exercise.muscleGroup }} ({{ criteria.repetitions }} reps, {{ criteria.series }} series)
-                        </li>
-                    </ul>
+                    <table class="table table-dark">
+                        <thead>
+                            <tr>
+                                <th class="fs-5 col-lg-6 offset-lg-3 mb-2">
+                                    Name
+                                </th>
+                                <th class="fs-5 col-lg-10 offset-lg-3 mb-2">
+                                    Muscle group
+                                </th>
+                                <th class="fs-5 col-lg-10 offset-lg-3 mb-2">
+                                    Repetitions
+                                </th>
+                                <th class="fs-5 col-lg-10 offset-lg-3 mb-2">
+                                    Series
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="list" *ngFor="let criteria of trainingPlan.exerciseCriterias">
+                                <td class="fs-5 col-lg-3 offset-lg-3 mb-2" >
+                                    {{ criteria.exercise.name }} 
+                                </td>
+                                <td class="fs-5 col-lg-3 offset-lg-3 mb-2" >
+                                    {{ criteria.exercise.muscleGroup }} 
+                                </td>
+                                <td class="fs-5 col-lg-3 offset-lg-3 mb-2" >
+                                    {{ criteria.repetitions }} 
+                                </td>
+                                <td class="fs-5 col-lg-3 offset-lg-3 mb-2" >
+                                    {{ criteria.series }} 
+                                </td>
+                            </tr>
+                        </tbody>
+                            
+                    </table>    
                 </div>
+                
             </div>
         </div>
     </div>
@@ -38,7 +61,7 @@
         </div>
         <div *ngIf="showAllTrainingPlans">
             <div *ngFor="let plan of allTrainingPlans" class="card mb-3">
-                <div class="card-body">
+                <div class="table table-striped">
                     <h5 class="card-title text-center">Training Plan {{plan.trainingPlan_id}}</h5>
                     <div class="row mb-2 align-items-center">
                         <p class="col-md-3 offset-md-3 col-6 text-md-start text-end fs-5">Trainer:</p>
@@ -55,11 +78,41 @@
                     <div class="row">
                         <div class="col-md-6 offset-md-3 col-12">
                             <strong class="fs-5">Exercises:</strong>
-                            <ul class="list-unstyled">
-                                <li class="fs-5 col-md-10 offset-md-3 mb-2" *ngFor="let criteria of plan.exerciseCriterias">
-                                    {{ criteria.exercise.name }} - {{ criteria.exercise.muscleGroup }} ({{ criteria.repetitions }} reps, {{ criteria.series }} series)
-                                </li>
-                            </ul>
+                            <table class="table table-dark">
+                                <thead>
+                                    <tr>
+                                        <th class="fs-5 col-lg-6 offset-lg-3 mb-2">
+                                            Name
+                                        </th>
+                                        <th class="fs-5 col-lg-10 offset-lg-3 mb-2">
+                                            Muscle group
+                                        </th>
+                                        <th class="fs-5 col-lg-10 offset-lg-3 mb-2">
+                                            Repetitions
+                                        </th>
+                                        <th class="fs-5 col-lg-10 offset-lg-3 mb-2">
+                                            Series
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="list" *ngFor="let criteria of plan.exerciseCriterias">
+                                        <td class="fs-5 col-lg-3 offset-lg-3 mb-2" >
+                                            {{ criteria.exercise.name }} 
+                                        </td>
+                                        <td class="fs-5 col-lg-3 offset-lg-3 mb-2" >
+                                            {{ criteria.exercise.muscleGroup }} 
+                                        </td>
+                                        <td class="fs-5 col-lg-3 offset-lg-3 mb-2" >
+                                            {{ criteria.repetitions }} 
+                                        </td>
+                                        <td class="fs-5 col-lg-3 offset-lg-3 mb-2" >
+                                            {{ criteria.series }} 
+                                        </td>
+                                    </tr>
+                                </tbody>
+                                    
+                            </table>  
                         </div>
                     </div>
                 </div>

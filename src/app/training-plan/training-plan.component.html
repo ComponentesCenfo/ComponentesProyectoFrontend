@@ -9,7 +9,7 @@
     
   </div>
 
-  <div class="form-row">
+  <div class="row">
     <div class="col-6 mt-3">
       <label for="fechaInicio">Start Date:</label>
       <input type="date" class="form-control" id="fechaInicio" [(ngModel)]="trainingPlan.startDate">
@@ -20,18 +20,21 @@
     </div>
   </div>
   <div id="rutinaGrid" class="mt-3">
-    <label>Exercises:</label>
+    
     <div id="criterias" class="row mb-3" *ngFor="let line of lines; let i = index">
-      <div class="col-4">
+      <div class="col-md-4 mb-4">
+        <label>Exercises:</label>
         <select class="form-control" [(ngModel)]="line.exerciseId">
           <option *ngFor="let exercise of exercises" [value]="exercise.id">{{ exercise.name }}</option>
         </select>
       </div>
-      <div class="col-4">
-        <input type="number" class="form-control" [(ngModel)]="line.reps" placeholder="Repetitions">
+      <div class="col-md-4 mb-4">
+        <label for="reps">Repetitions</label>
+        <input id="reps" type="number" class="form-control" [(ngModel)]="line.reps">
       </div>
-      <div class="col-4">
-        <input type="number" class="form-control" [(ngModel)]="line.series" placeholder="Series">
+      <div class="col-md-4 mb-4">
+        <label for="ser">Series</label>
+        <input id="ser" type="number" class="form-control" [(ngModel)]="line.series">
       </div>
     </div>
     <button class="btn btn-primary me-3 " type="button" (click)="addLine()">Add Exercise</button>
