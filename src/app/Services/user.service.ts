@@ -9,8 +9,8 @@ import {baseUrl} from './helper';
 export class UserService{
     constructor(private httpClient: HttpClient) {}
     
-    public getUserByEmail(email:any){
-        return this.httpClient.post(`${baseUrl()}/getClientByEmail`, email)
+    public login(loginData:any){
+        return this.httpClient.post(`${baseUrl()}/login`, loginData)
     }
     public addUser(user: any) {
     return this.httpClient.post(`${baseUrl()}/createClient`, user);
