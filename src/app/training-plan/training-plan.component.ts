@@ -156,8 +156,8 @@ export class TrainingPlanComponent implements OnInit {
       endDate: plan.endDate,
       exerciseList: plan.exerciseCriterias 
     };
-  
     this.lines = plan.exerciseCriterias.map(criteria => ({
+      id: criteria.id,
       exerciseId: criteria.exercise.id,
       reps: criteria.repetitions,
       series: criteria.series
@@ -191,24 +191,12 @@ export class TrainingPlanComponent implements OnInit {
         trainer: { id: this.trainingPlan.trainer.id },
         startDate: this.trainingPlan.startDate,
         endDate: this.trainingPlan.endDate,
-        exerciseCriterias: this.lines.map(line => ({
-          exercise: { id: line.exerciseId },
-          repetitions: line.reps,
-          series: line.series
-        }))
       };
   
       this.trainingPlanService.editTrainingPlan(updatePayload).subscribe(
-  
         (response: any) => {
-          Swal.fire({
-            title: 'Training Plan Updated',
-            text: 'The training plan has been updated successfully!',
-            icon: 'success'
-          });
-          this.refreshTrainerPlans();
-          this.resetForm();
-          this.isUpdating = false;
+          console.log('API response:', response);
+          this.updateExerciseCriteria(this.trainingPlan.trainingPlan_id);
         },
         error => {
           console.error('API error:', error);
@@ -226,6 +214,32 @@ export class TrainingPlanComponent implements OnInit {
         icon: 'warning'
       });
     }
+  }
+  
+  private updateExerciseCriteria(trainingPlanId: number): void {
+    this.lines.forEach((line: any) => {
+      console.log('Updating exercise criteria:', line);
+      let exerciseCriteria = {
+        id: line.id, 
+        exercise: { id: line.exerciseId },
+        trainingPlan: { trainingPlan_id: trainingPlanId },
+        repetitions: line.reps,
+        series: line.series
+      };
+  
+      this.exerciseService.updateExerciseCriteria(exerciseCriteria).subscribe(
+        response => {
+          Swal.fire({
+            title: 'Update Successful',
+            text: 'The training plan has been updated.',
+            icon: 'success'
+          });
+          this.resetForm();
+          this.refreshTrainerPlans();
+        },
+        error => console.error('API error:', error)
+      );
+    });
   }
 
   // Método de ayuda para validar el plan de entrenamiento antes de enviar

@@ -75,16 +75,13 @@ export class LoginComponent implements OnInit{
       return;
     }
     
-    this.userService.getUserByEmail(this.loginData.email).subscribe(
+    this.userService.login(this.loginData).subscribe(
       (response: any) => {
         // Assuming 'response' will be null or empty if no user is found
+        console.log(this.loginData)
         if (response) {
           this.loginService.setUserClient(response);
-          if (this.loginData.email === response.email && this.loginData.password === response.password) {
             window.location.href = "/client";
-          } else {
-            this.showInvalidCredentialsAlert();
-          }
         }
       },
       (error) => {
@@ -94,17 +91,13 @@ export class LoginComponent implements OnInit{
     );
   }
   private checkForTrainer() {
-    this.trainerService.getTrainerByEmail(this.loginData.email).subscribe(
+    this.trainerService.getTrainerByEmail(this.loginData).subscribe(
       (trainerResponse: any) => {
         if (trainerResponse) {
           this.loginService.setUserTrainer(trainerResponse);
-          if (this.loginData.email === trainerResponse.email && this.loginData.password === trainerResponse.password) {
             window.location.href = "/trainer";
-          } else {
-            this.showInvalidCredentialsAlert();
-          }
         } else {
-          // No trainer found either
+          // No trainer found either            
           this.showInvalidCredentialsAlert();
         }
       },

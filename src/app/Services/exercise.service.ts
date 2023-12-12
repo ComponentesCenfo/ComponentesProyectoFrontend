@@ -16,4 +16,7 @@ export class ExerciseService {
   public createExerciseCriteria(exerciseCriteria:any){
     return this.httpClient.post(`${baseUrl()}/createExerciseCriteria`, exerciseCriteria)
   }
+  public updateExerciseCriteria(exerciseCriteria:any){
+    return this.httpClient.put(`${baseUrl()}/updateExerciseCriteria`, exerciseCriteria)
+  }
 }
