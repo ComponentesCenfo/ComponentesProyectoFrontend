@@ -1,0 +1,114 @@
+/* 
+.parent{
+    align-items: center;
+    display: flex;
+   
+}
+.form{
+    width: 50%;
+}
+.register-form {
+    padding: 25px 15px;
+    border-radius: 0px 40px 0px 40px;
+    margin: 50px 0px;
+    border: 1px solid #ddd;
+    float: left;
+    width: 100%;
+    box-shadow: 0px 0px 10px 0px #cacaca;
+    border-left: 5px solid #28a745;
+    display: flex;
+    
+}
+.register-form .form-parent{
+    width: 100%;
+}
+.register-form .form-group {
+    position: relative;
+    width: 100%;
+}
+.register-form .hint {
+    display: none;
+    position: absolute;
+    right: 0;
+}
+
+.register-img{
+    width: 500px;
+    padding-right: 20%;
+
+}
+
+img{
+    width: 100%;
+}
+
+#container{
+    width: 80%;
+    
+} */
+
+.card-registration .select-input.form-control[readonly]:not([disabled]) {
+    font-size: 1rem;
+    
+    line-height: 2.15;
+    padding-left: .75em;
+    padding-right: .75em;
+    }
+    .card-registration .select-arrow {
+    top: 13px;
+    }
+p{
+    color: white;
+}
+label{
+    color: white;
+}
+h3{
+    color: white;
+}
+
+#parent{
+    align-items: center;
+    display: flex;
+    
+}
+
+#image{
+    background-image:url('/assets/background.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 660px;
+}
+
+.bg-image{
+    background-image: "assets/background.jpg";
+    background-size: cover;
+    background-attachment: fixed;
+
+}
+
+.img-cover {
+    width: 100%; /* Tamaño fijo para pantallas grandes */
+    height: auto;
+    border-top-right-radius: .25rem;
+    border-bottom-right-radius: .25rem;
+  }
+
+
+
+@media (max-width: 768px) {
+    .img-cover {
+      width: 100%; /* Tamaño completo para pantallas pequeñas */
+    }
+
+    #image{
+        background-image:url('/assets/background.jpg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        height: 300px;
+    }
+  }
+
+
