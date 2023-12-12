@@ -1,24 +1,120 @@
 <div class="container mt-3">
-  <h2>BMI Calculator</h2>
-
-  <div class="mb-3">
-    <label for="weight" class="form-label">Weight (in kilograms)</label>
-    <input type="number" class="form-control" id="weight" [(ngModel)]="peso" placeholder="Enter your weight">
+  <div class="container mb-3 d-flex justify-content-evenly">
+  <button class="btn btn-primary"(click)="mostrarBmiCalculator = !mostrarBmiCalculator">BMI Calculator</button>
+  <button class="btn btn-primary "(click)="mostrarBodyFatCalculator = !mostrarBodyFatCalculator">Body Fat % Calculator</button>
+  <button class="btn btn-primary "(click)="mostrarTmbCalculator = !mostrarTmbCalculator">TMB Calculator</button>
+  <button class="btn btn-primary "(click)="mostrar1rmCalculator = !mostrar1rmCalculator">1RM Calculator</button>
   </div>
 
-  <div class="mb-3">
-    <label for="height" class="form-label">Height (in meters)</label>
-    <input type="number" class="form-control" id="height" [(ngModel)]="altura" placeholder="Enter your height (0.00)">
+
+
+  <div *ngIf="!mostrarBmiCalculator">
+    <div class="mb-3">
+      <h2>BMI Calculator</h2>
+      <label for="weight" class="form-label">Weight (in kilograms)</label>
+      <input type="number" class="form-control" id="weight" [(ngModel)]="peso" placeholder="Enter your weight">
+    </div>
+    <div class="mb-3">
+      <label for="height" class="form-label">Height (in meters)</label>
+      <input type="number" class="form-control" id="height" [(ngModel)]="altura" placeholder="Enter your height (0.00)">
+    </div>
+    <div class="mb-3">
+      <button class="btn btn-primary" (click)="calcularIMC()">Calculate BMI</button>
+    </div>
+    <div *ngIf="imc">
+      <p>Your BMI is: {{ imc | number: '1.1-2' }}</p>
+      <p>Classification: {{ clasificacionIMC }}</p>
+    </div>
   </div>
 
-  <div class="mb-3">
-    <button class="btn btn-primary" (click)="calcularIMC()">Calculate BMI</button>
+  <div *ngIf="mostrarBodyFatCalculator">
+    <div class="mb-3">
+      <h2>Body Fat % Calculator</h2>
+      <label for="weight" class="form-label">Weight (in kilograms)</label>
+      <input type="number" class="form-control" id="weight" [(ngModel)]="peso3" placeholder="Enter your weight">
+    </div>
+    
+    <div class="mb-3">
+      <label for="height" class="form-label">Height (in meters)</label>
+      <input type="number" class="form-control" id="height" [(ngModel)]="altura3" placeholder="Enter your height (0.00)">
+    </div>
+  
+    <div class="mb-3">
+      <label for="edad" class="form-label">Age</label>
+      <input type="number" class="form-control" id="edad" [(ngModel)]="edad2" placeholder="Enter your age">
+    </div>
+  
+    <div class="mb-3">
+      <label for="genero" class="form-label">Gender</label>
+      <select class="form-select" id="genero" [(ngModel)]="genero2">
+        <option value="Male">Male</option>
+        <option value="Female">Female</option>
+      </select>
+    </div>
+  
+    <div class="mb-3">
+      <button class="btn btn-primary" (click)="calcularGrasaCorporal()">Calculate Body Fat</button>
+    </div>
+  
+    <div *ngIf="grasaCorporal">
+      <p>Your Body Fat Percentage is: {{ grasaCorporal | number: '1.1-2' }}%</p>
+    </div>
   </div>
 
-  <div *ngIf="imc">
-    <p>Your BMI is: {{ imc | number: '1.1-2' }}</p>
-    <p>Classification: {{ clasificarIMC }}</p>
+  <div *ngIf="mostrarTmbCalculator">
+    <div class="mb-3">
+      <h2>TMB Calculator</h2>
+      <label for="weight" class="form-label">Weight (in kilograms)</label>
+      <input type="number" class="form-control" id="weight" [(ngModel)]="peso2" placeholder="Enter your weight">
+    </div>
+    
+    <div class="mb-3">
+      <label for="height" class="form-label">Height (in meters)</label>
+      <input type="number" class="form-control" id="height" [(ngModel)]="altura2" placeholder="Enter your height (0.00)">
+    </div>
+  
+    <div class="mb-3">
+      <label for="edad" class="form-label">Age</label>
+      <input type="number" class="form-control" id="edad" [(ngModel)]="edad" placeholder="Enter your age">
+    </div>
+  
+    <div class="mb-3">
+      <label for="genero" class="form-label">Gender</label>
+      <select class="form-select" id="genero" [(ngModel)]="genero">
+        <option value="Male">Male</option>
+        <option value="Female">Female</option>
+      </select>
+    </div>
+    
+    <div class="mb-3">
+      <button class="btn btn-primary" (click)="calcularTMB()">Calculate BMR</button>
+    </div>
+  
+    <div *ngIf="tmb">
+      <p>Your Basal Metabolic Rate (BMR) is: {{ tmb | number: '1.0-0' }} calories/day</p>
+    </div>
   </div>
+
+  <div *ngIf="mostrar1rmCalculator">
+    <div class="mb-3">
+      <h2>1RM Calculator</h2>
+      <label for="pesoLevantado" class="form-label">Weight lifted</label>
+      <input type="number" class="form-control" id="pesoLevantado" [(ngModel)]="pesoLevantado" placeholder="Enter lifted weight">
+    </div>
+  
+    <div class="mb-3">
+      <label for="repeticiones" class="form-label">Repetitions</label>
+      <input type="number" class="form-control" id="repeticiones" [(ngModel)]="repeticiones" placeholder="Enter repetitions">
+    </div>
+  
+    <div class="mb-3">
+      <button class="btn btn-primary" (click)="calcular1RM()">Calculate 1RM</button>
+    </div>
+  
+    <div *ngIf="unoRM">
+      <p>Your One-Rep Max (1RM) is: {{ unoRM | number: '1.0-0' }} kg</p>
+    </div>
+  </div>
+
 </div>
-
 
